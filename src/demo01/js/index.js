@@ -33,6 +33,7 @@
 		}
 	}
 
+
 	window.onload = function() {
 		//react虚拟dom渲染到真实dom
 		ReactDOM.render(
