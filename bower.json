@@ -1,0 +1,25 @@
+{
+  "name": "demos",
+  "description": "react demos",
+  "main": "gulpfile.js",
+  "authors": [
+    "liuxin"
+  ],
+  "license": "MIT",
+  "keywords": [
+    "react",
+    "demos"
+  ],
+  "homepage": "https://github.com/lovesora/react-demo",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "vendor",
+    "test",
+    "tests"
+  ],
+  "devDependencies": {
+    "react": "^15.4.2"
+  }
+}
