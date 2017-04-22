@@ -16,7 +16,6 @@
     //jsx语法
     var div = <div>{cDiv.getName()}</div>;
 
-
     //react组件
     class Comp extends React.Component {
         //必须给render方法
