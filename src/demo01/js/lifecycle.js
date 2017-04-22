@@ -1,5 +1,5 @@
 (function() {
-    if ("lifecircle" != configs.globalFileName)
+    if ("lifecycle" != configs.globalFileName)
         return;
 
     //clock

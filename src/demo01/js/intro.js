@@ -1,5 +1,5 @@
 (function() {
-    if ("index" != configs.globalFileName)
+    if ("intro" != configs.globalFileName)
         return;
 
     //es6类

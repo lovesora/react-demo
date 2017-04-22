@@ -1,3 +1,6 @@
 {
-	"directory": "vendor"
+	"directory": "vendor",
+    "proxy": "http://127.0.0.1:8118",
+    "https-proxy": "http://127.0.0.1:8118",
+    "strict-ssl": false
 }
