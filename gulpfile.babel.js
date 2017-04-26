@@ -240,7 +240,7 @@ class Task {
                 $.callback(() => {
                     this.reload(p);
                 })
-            ]).on('error', this.combinerErrHandler.react)
+            ]).on('error', this.combinerErrHandler.react);
         else
             combiner.obj([
                 gulp.src(p.srcPath),
@@ -257,7 +257,7 @@ class Task {
                 $.callback(() => {
                     this.reload(p);
                 })
-            ]).on('error', this.combinerErrHandler.react)
+            ]).on('error', this.combinerErrHandler.react);
         return this;
     }
 
@@ -319,21 +319,21 @@ class Task {
             ]).on('error', this.combinerErrHandler.common);
         else
             combiner.obj([
-            gulp.src(p.srcPath),
-            $.postcss([autoprefixer()]),
-            $.concat('all.css'),
-            gulp.dest(p.distDir),
-            $.cleanCss({
-                compatibility: 'ie8'
-            }),
-            $.rename(p => {
-                p.extname = '.min.css';
-            }),
-            gulp.dest(p.distDir),
-            $.callback(() => {
-                this.reload(p);
-            })
-        ]).on('error', this.combinerErrHandler.common);
+                gulp.src(p.srcPath),
+                $.postcss([autoprefixer()]),
+                $.concat('all.css'),
+                gulp.dest(p.distDir),
+                $.cleanCss({
+                    compatibility: 'ie8'
+                }),
+                $.rename(p => {
+                    p.extname = '.min.css';
+                }),
+                gulp.dest(p.distDir),
+                $.callback(() => {
+                    this.reload(p);
+                })
+            ]).on('error', this.combinerErrHandler.common);
         return this;
     }
 }
@@ -373,7 +373,7 @@ gulp.task('watch', () => {
                 });
         });
     });
-})
+});
 
 gulp.task('connect', () => {
     $.connect.server({
@@ -381,7 +381,7 @@ gulp.task('connect', () => {
         root: './',
         livereload: true
     });
-})
+});
 
 gulp.task('init', () => {
     new Task()

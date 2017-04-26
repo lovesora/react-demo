@@ -48,7 +48,7 @@
         }
 
         render() {
-            return <div>{this.state.h}:{this.state.m}:{this.state.s}</div>
+            return <div>{this.state.h}:{this.state.m}:{this.state.s}</div>;
         }
     }
 
@@ -79,7 +79,7 @@
         componentDidMount() {
             this.setState({
                 items: this.state.values.map((v, k) => <Item key={k} value={v} />)
-            })
+            });
         }
 
         addItem() {
@@ -108,7 +108,6 @@
 
     window.onload = function() {
         var i = 0;
-
         //componentWillUnmount
         document.getElementById('clock-comp').onclick = () => {
             if (i++ % 2) {
@@ -133,6 +132,6 @@
             <List />,
             document.getElementById('receive-props-comp')
         );
-    }
+    };
 
 })();
