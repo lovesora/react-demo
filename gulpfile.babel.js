@@ -82,6 +82,12 @@ class Configs {
         this.less = `${this.srcDir}**/**.less`;
 
         /**
+         * scss所在源文件夹
+         * @type {String}
+         */
+        this.scss = `${this.srcDir}**/**.scss`;
+
+        /**
          * css所在源文件夹
          * @type {String}
          */
@@ -98,20 +104,55 @@ var configs = new Configs();
 /**
  * 日志(输出到控制台)
  * @param {Object} path 被修改文件的路径信息
+ * this.path:
+ * {
+        "srcFilename": "start.css",
+        "distFilename": "start.css",
+        "srcPath": "src\\demo-mdl\\css\\start.css",
+        "srcDir": "src\\demo-mdl\\css",
+        "distPath": "dist\\demo-mdl\\css\\start.css",
+        "distDir": "dist\\demo-mdl\\css"
+    }
  */
 class Log {
     /**
      * @param {Object} event 文件被修改时发生的事件
      * @param {Boolean} isToDist 是否输出到Dist目录
+     *
+     * event
+     * {
+            "history": ["D:\\Developer\\Web\\react-demo\\src\\demo-mdl\\css\\start.css"],
+            "cwd": "D:\\Developer\\Web\\react-demo",
+            "base": "D:\\Developer\\Web\\react-demo\\src",
+            "stat": {
+                "dev": 1211568586,
+                "mode": 33206,
+                "nlink": 1,
+                "uid": 0,
+                "gid": 0,
+                "rdev": 0,
+                "ino": 844424930296236,
+                "size": 0,
+                "atime": "2017-04-28T07:54:27.751Z",
+                "mtime": "2017-04-28T07:58:49.028Z",
+                "ctime": "2017-04-28T07:58:49.028Z",
+                "birthtime": "2017-04-28T07:48:38.550Z"
+            },
+            "_contents": {
+                "type": "Buffer",
+                "data": []
+            },
+            "_isVinyl": true,
+            "event": "change"
+        }
      */
     constructor(event, isToDist = true) {
         if (isToDist)
             this.path = $.watchPath(event, configs.srcDir, configs.distDir);
         else
             this.path = $.watchPath(event, configs.srcDir, configs.srcDir);
-
         console.log('\n');
-        $.util.log($.util.colors.green(JSON.stringify(event.type)) + ": " + this.path.srcPath);
+        $.util.log($.util.colors.green(JSON.stringify(event.event)) + ": " + this.path.srcPath);
     }
 
     /**
@@ -142,8 +183,6 @@ class CombinerErrHandler {
         $.util.log(colors.red('Error!'));
         $.util.log('fileName: ' + colors.red(err.fileName));
         $.util.log('plugin: ' + colors.yellow(err.plugin));
-
-
         $.util.log('cause: ' + colors.red(err));
 
         // $.util.log('lineNumber: ' + colors.red(err.cause.line));
@@ -179,8 +218,10 @@ class Task {
      * @param {srcPath,distDir} p 被修改目标的路径信息
      */
     reload(p) {
-        gulp.src(p.srcPath)
-            .pipe($.connect.reload());
+        setTimeout(() => {
+            gulp.src(p.srcPath)
+                .pipe($.connect.reload());
+        }, 300);
     }
 
     /**
@@ -280,9 +321,7 @@ class Task {
         else
             combiner.obj([
                 gulp.src(p.srcPath),
-                $.sourcemaps.init(),
                 $.less(),
-                $.sourcemaps.write('./'),
                 gulp.dest(p.distDir),
                 $.callback(() => {
                     this.reload(p);
@@ -291,6 +330,51 @@ class Task {
         return this;
     }
 
+    rubySass(p) {
+        if (configs.isSourcemaps)
+            combiner.obj([
+                $.rubySass(p.srcPath, {
+                    sourcemap: true
+                }).on('error', $.rubySass.logError),
+                $.sourcemaps.write('./'),
+                gulp.dest(p.distDir),
+                $.callback(() => {
+                    this.reload(p);
+                })
+            ]);
+        else
+            combiner.obj([
+                $.rubySass(p.srcPath).on('error', $.rubySass.logError),
+                gulp.dest(p.distDir),
+                $.callback(() => {
+                    this.reload(p);
+                })
+            ]);
+        return this;
+    }
+
+    sass(p) {
+        if (configs.isSourcemaps)
+            combiner.obj([
+                gulp.src(p.srcPath),
+                $.sourcemaps.init(),
+                $.sass().on('error', $.sass.logError),
+                $.sourcemaps.write('./'),
+                gulp.dest(p.distDir),
+                $.callback(() => {
+                    this.reload(p);
+                })
+            ]);
+        else
+            combiner.obj([
+                gulp.src(p.srcPath),
+                $.sass().on('error', $.sass.logError),
+                gulp.dest(p.distDir),
+                $.callback(() => {
+                    this.reload(p);
+                })
+            ]);
+    }
 
     /**
      * 添加浏览器前缀&合并&压缩css
@@ -340,7 +424,7 @@ class Task {
 
 
 gulp.task('watch', () => {
-    gulp.watch(configs.reactjs, event => {
+    $.watch(configs.reactjs, event => {
         new Log(event).cb(path => {
             new Task()
                 .react({
@@ -350,21 +434,28 @@ gulp.task('watch', () => {
         });
     });
 
-    gulp.watch(configs.html, event => {
+    $.watch(configs.html, event => {
         new Log(event).cb(path => {
             new Task()
                 .html(path);
         });
     });
 
-    gulp.watch(configs.less, event => {
+    $.watch(configs.less, event => {
         new Log(event, false).cb(path => {
             new Task()
                 .less(path);
         });
     });
 
-    gulp.watch(configs.css, event => {
+    $.watch(configs.scss, event => {
+        new Log(event, false).cb(path => {
+            new Task()
+                .rubySass(path);
+        });
+    });
+
+    $.watch(configs.css, event => {
         new Log(event).cb(path => {
             new Task()
                 .css({
@@ -395,6 +486,10 @@ gulp.task('init', () => {
         })
         .less({
             srcPath: configs.less,
+            distDir: configs.srcDir
+        })
+        .rubySass({
+            srcPath: configs.scss,
             distDir: configs.srcDir
         })
         .css({

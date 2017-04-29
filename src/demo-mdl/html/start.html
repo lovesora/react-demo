@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" href="/vendor/material-design-lite/material.min.css">
+    <script src="/vendor/material-design-lite/material.min.js"></script>
+    <link rel="stylesheet" href="../../common/css/all.min.css">
+</head>
+
+<body>
+    <!-- Accent-colored raised button with ripple -->
+    <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
+        Button
+    </button>
+    <hr>
+    <div id="container" />
+    <script>
+    var button = document.createElement('button');
+    var textNode = document.createTextNode('Click Me!');
+    button.appendChild(textNode);
+    button.className = 'mdl-button mdl-js-button mdl-js-ripple-effect';
+    componentHandler.upgradeElement(button);
+    document.getElementById('container').appendChild(button);
+    </script>
+    <hr>
+    <!-- Number badge on icon -->
+    <div class="material-icons mdl-badge mdl-badge--overlap" data-badge="1">account_box</div>
+    <!-- Icon badge on icon -->
+    <div class="material-icons mdl-badge mdl-badge--overlap" data-badge="♥">account_box</div>
+    <hr>
+    <!-- Icon button -->
+    <button class="mdl-button mdl-js-button mdl-button--icon">
+        <i class="material-icons">mood</i>
+    </button>
+    <hr>
+    <!-- FAB button -->
+    <button class="mdl-button mdl-js-button mdl-button--fab">
+        <i class="material-icons">add</i>
+    </button>
+    <hr>
+    <!-- MDL Progress Bar with Indeterminate Progress -->
+    <div id="p2" class="mdl-progress mdl-js-progress mdl-progress__indeterminate"></div>
+    <hr>
+    <button id="demo-show-toast" class="mdl-button mdl-js-button mdl-button--raised" type="button">Show Toast</button>
+    <div id="demo-toast-example" class="mdl-js-snackbar mdl-snackbar">
+        <div class="mdl-snackbar__text"></div>
+        <button class="mdl-snackbar__action" type="button"></button>
+    </div>
+    <script>
+    (function() {
+        'use strict';
+        window['counter'] = 0;
+        var snackbarContainer = document.querySelector('#demo-toast-example');
+        var showToastButton = document.querySelector('#demo-show-toast');
+        showToastButton.addEventListener('click', function() {
+            'use strict';
+            var data = {
+                message: 'Example Message # ' + ++counter
+            };
+            snackbarContainer.MaterialSnackbar.showSnackbar(data);
+        });
+    }());
+    </script>
+    <hr>
+    <!-- Simple Textfield -->
+    <form action="#">
+        <div class="mdl-textfield mdl-js-textfield">
+            <input class="mdl-textfield__input" type="text" id="sample1">
+            <label class="mdl-textfield__label" for="sample1">Text...</label>
+        </div>
+    </form>
+    <!-- Numeric Textfield -->
+    <form action="#">
+        <div class="mdl-textfield mdl-js-textfield">
+            <input class="mdl-textfield__input" type="text" pattern="-?[0-9]*(\.[0-9]+)?" id="sample2">
+            <label class="mdl-textfield__label" for="sample2">Number...</label>
+            <span class="mdl-textfield__error">Input is not a number!</span>
+        </div>
+    </form>
+    <!-- Textfield with Floating Label -->
+    <form action="#">
+        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+            <input class="mdl-textfield__input" type="text" id="sample3">
+            <label class="mdl-textfield__label" for="sample3">Text...</label>
+        </div>
+    </form>
+    <!-- Numeric Textfield with Floating Label -->
+    <form action="#">
+        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+            <input class="mdl-textfield__input" type="text" pattern="-?[0-9]*(\.[0-9]+)?" id="sample4">
+            <label class="mdl-textfield__label" for="sample4">Number...</label>
+            <span class="mdl-textfield__error">Input is not a number!</span>
+        </div>
+    </form>
+    <!-- Expandable Textfield -->
+    <form action="#">
+        <div class="mdl-textfield mdl-js-textfield mdl-textfield--expandable">
+            <label class="mdl-button mdl-js-button mdl-button--icon" for="sample6">
+                <i class="material-icons">search</i>
+            </label>
+            <div class="mdl-textfield__expandable-holder">
+                <input class="mdl-textfield__input" type="text" id="sample6">
+                <label class="mdl-textfield__label" for="sample-expandable">Expandable Input</label>
+            </div>
+        </div>
+    </form>
+    <div class="mdl-grid">
+        <div class="mdl-cell mdl-cell--4-col mdl-cell--8-col-tablet">Content</div>
+        <div class="mdl-cell mdl-cell--4-col mdl-cell--8-col-tablet">goes</div>
+        <div class="mdl-cell mdl-cell--4-col mdl-cell--8-col-tablet">here</div>
+    </div>
+</body>
+
+</html>

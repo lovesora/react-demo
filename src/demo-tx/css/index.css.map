@@ -1,0 +1,1 @@
+{"version":3,"sources":["demo-tx/css/index.less"],"names":[],"mappings":"AAAA,MACI;EACI,YAAA;EACA,aAAA;EACA,gBAAA","sourcesContent":["#index {\r\n    .show-hide {\r\n        width: 200px;\r\n        height: 200px;\r\n        background: #ccc;\r\n    }\r\n}"],"file":"index.css"}

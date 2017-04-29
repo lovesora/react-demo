@@ -37,9 +37,11 @@
     "gulp-load-plugins": "^1.5.0",
     "gulp-postcss": "^6.3.0",
     "gulp-rename": "^1.2.2",
+    "gulp-ruby-sass": "^2.1.1",
     "gulp-sourcemaps": "^2.4.1",
     "gulp-uglify": "^2.0.1",
     "gulp-util": "^3.0.8",
+    "gulp-watch": "^4.3.11",
     "gulp-watch-path": "^0.1.0",
     "stream-combiner2": "^1.1.1"
   }

@@ -1,0 +1,118 @@
+﻿install packages
+1）install package control
+Ctrl+` to open the terminal of sublime：
+import urllib.request,os,hashlib; h = 'df21e130d211cfc94d9b0905775a7c0f' + '1e3d39e33b79698005270310898eea76'; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( 'http://packagecontrol.io/' + pf.replace(' ', '%20')).read(); dh = hashlib.sha256(by).hexdigest(); print('Error validating download (got %s instead of %s), please try manual install' % (dh, h)) if dh != h else open(os.path.join( ipp, pf), 'wb' ).write(by)
+
+2）lists of the packages(http://www.jianshu.com/p/5905f927d01b)
+    1.WordCount
+    2.ConvertToUTF8
+    3.Terminal
+      settings - user
+      {
+        // Replace with your own path to cmder.exe
+        "terminal": "D:\\Developer\\cmder\\cmder.exe",
+        "parameters": ["/START", "%CWD%"]
+      }
+      key bingding - user
+      [
+        { "keys": ["ctrl+alt+t"], "command": "open_terminal" },
+        { "keys": ["ctrl+shift+alt+t"], "command": "open_terminal_project_folder" }
+      ]
+    4.Side​Bar​Enhancements
+    5.Compare Side-By-Side
+    6.BracketHighlighter
+    7.PlainTasks
+    8.TrailingSpaces
+    9.git
+
+3)react packages(https://segmentfault.com/a/1190000003698071)
+    1.highlight syntax(es6,jsx)
+      babel
+    2.check syntax
+      SublimeLinter-contrib-eslint
+      npm install -g eslint
+      npm install -g babel-eslint
+      project/.eslintrc
+      {
+        "parser": "babel-eslint",
+        "env": {
+            "browser": true,
+            "node": true,
+            "es6": true
+        },
+        "ecmaFeatures": {
+            "modules": true,
+            "jsx": true
+        }
+      }
+    3.格式化代码
+      HTML-CSS-JS Prettify
+      设置快捷键&nodejs路径
+    4.Emmet
+      add the following code to preferences->Key bindings->Users:
+      [{
+        "keys": ["tab"],
+        "command": "expand_abbreviation_by_tab",
+
+        // put comma-separated syntax selectors for which
+        // you want to expandEmmet abbreviations into "operand" key
+        // instead of SCOPE_SELECTOR.
+        // Examples: source.js, text.html - source
+        "context": [
+          {
+            "operand": "source.js",
+            "operator": "equal",
+            "match_all": true,
+            "key": "selector"
+          },
+
+          // run only if there's no selected text
+          {
+            "match_all": true,
+            "key": "selection_empty"
+          },
+
+          // don't work if there are active tabstops
+          {
+            "operator": "equal",
+            "operand": false,
+            "match_all": true,
+            "key": "has_next_field"
+          },
+
+          // don't work if completion popup is visible and you
+          // want to insert completion with Tab. If you want to
+          // expand Emmet with Tab even if popup is visible --
+          // remove this section
+          {
+            "operand": false,
+            "operator": "equal",
+            "match_all": true,
+            "key": "auto_complete_visible"
+          },
+          {
+            "match_all": true,
+            "key": "is_abbreviation"
+          }
+        ]
+      }]
+      download PyV8:https://raw.githubusercontent.com/emmetio/pyv8-binaries/master/pyv8-win64-p3.zip
+      upzip it into:
+      Sublime Text3 > Installed Packages > PyV8 > pyv8-win64-p3
+      Sublime Text3 > Packages > PyV8 > pyv8-win64-p3
+    5.js代码提示
+      SublimeCodeIntel
+
+4)Web development
+    1.Sublime注释插件-Doc​Blockr
+
+5)sass
+    1.sass代码高亮
+      Sass
+      view -> syntax -> sass
+    2.格式化css代码
+      CSS Format
+    3.颜色选取
+      Color Helper
+
+6)
