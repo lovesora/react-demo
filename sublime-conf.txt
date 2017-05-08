@@ -102,6 +102,13 @@ import urllib.request,os,hashlib; h = 'df21e130d211cfc94d9b0905775a7c0f' + '1e3d
       Sublime Text3 > Packages > PyV8 > pyv8-win64-p3
     5.js代码提示
       SublimeCodeIntel
+    6.添加递增数字
+      Insert Num
+      先进入多行编辑然后点快捷键 Ctrl+Alt+N
+    7.自动添加文件
+      AutoFileName
+    8.剪切板历史
+      Clipboard History
 
 4)Web development
     1.Sublime注释插件-Doc​Blockr
@@ -115,4 +122,15 @@ import urllib.request,os,hashlib; h = 'df21e130d211cfc94d9b0905775a7c0f' + '1e3d
     3.颜色选取
       Color Helper
 
-6)
+6)markdown
+    1.语法高亮
+    Markdown Editing
+    2.实时预览
+    OmniMarkupPreviewer Ctrl+Alt+o
+    Sublime Text > Preferences > Package Settings > OmniMarkupPreviewer > Settings - User
+    paste the following to remove the strikeout package.
+    {
+        "renderer_options-MarkdownRenderer": {
+            "extensions": ["tables", "fenced_code", "codehilite"]
+        }
+    }

@@ -4,9 +4,9 @@
  * 2.react jsx编译
  * 3.es6转化
  * 4.合并&压缩js
- * 5.编译less
+ * 5.编译less&scss
  * 6.合并&压缩css
- * 
+ *
  * @author 刘鑫<475212506@qq.com>
  */
 
@@ -25,7 +25,7 @@ class Configs {
          * gulp-connect端口号
          * @type {Number}
          */
-        this.port = 8000;
+        this.port = 8001;
 
         /**
          * 是否启用Sourcemaps
@@ -92,6 +92,18 @@ class Configs {
          * @type {String}
          */
         this.css = `${this.srcDir}**/**.css`;
+
+        /**
+         * vendor目录
+         */
+        this.vendor = 'vendor';
+
+        /**
+         * vendor > materialize
+         * @type {String}
+         */
+        this.vendor_materialze = `${this.vendor}/materialize/sass/materialize.scss`;
+        this.vendor_materialzeDistDir = `${this.vendor}/materialize/dist/css/`;
     }
 }
 
@@ -422,6 +434,31 @@ class Task {
     }
 }
 
+class vendorCompile {
+    materialize() {
+        combiner.obj([
+            $.rubySass(configs.vendor_materialze, {
+                sourcemap: true
+            }).on('error', $.rubySass.logError),
+            gulp.dest(configs.vendor_materialzeDistDir),
+            $.cleanCss({
+                compatibility: 'ie8'
+            }),
+            $.rename(p => {
+                p.extname = '.min.css';
+            }),
+            $.sourcemaps.mapSources(function(sourcePath, file) {
+                return '../../sass/' + sourcePath;
+            }),
+            $.sourcemaps.write('./'),
+            gulp.dest(configs.vendor_materialzeDistDir)
+        ]);
+    }
+}
+
+gulp.task('vendor', () => {
+    new vendorCompile().materialize();
+})
 
 gulp.task('watch', () => {
     $.watch(configs.reactjs, event => {
